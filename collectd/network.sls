@@ -18,6 +18,7 @@ include:
         listens: {{ listens }}
         ReportStats: {{ salt['pillar.get']('collectd:plugins:network:ReportStats', false) }}
 
+{% if salt['grains.get']('roles:collectd_server') %}
 {% for listen in listens %}
 {% if listen.AuthFile %}
 {{ listen.AuthFile }}:
@@ -31,3 +32,4 @@ include:
         users: {{ listen.users }}
 {% endif %}
 {% endfor %}
+{% endif %}

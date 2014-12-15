@@ -98,3 +98,10 @@ collectd:
     statsd:
       host: localhost
       port: 8125
+    nginx:
+      url: http://localhost/status?auto
+      user: www-user
+      password: secret
+      vefirypeer: false
+      verifyhost: false
+      cacert: /etc/ssl/ca.crt

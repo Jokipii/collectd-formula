@@ -37,8 +37,8 @@ collectd:
         Timeout: {{ salt['pillar.get']('collectd:Timeout', 2) }}
         ReadThreads: {{ salt['pillar.get']('collectd:ReadThreads', 5) }}
         WriteThreads: {{ salt['pillar.get']('collectd:WriteThreads', 5) }}
-        WriteQueueLimitHigh: {{ salt['pillar.get']('collectd:WriteQueueLimitHigh ,1000000) }}
-        WriteQueueLimitLow: {{ salt['pillar.get']('collectd:WriteQueueLimitLow ,800000) }}
+        WriteQueueLimitHigh: {{ salt['pillar.get']('collectd:WriteQueueLimitHigh', 1000000) }}
+        WriteQueueLimitLow: {{ salt['pillar.get']('collectd:WriteQueueLimitLow', 800000) }}
         default: {{ salt['pillar.get']('collectd:plugins:default') }}
         plugindirconfig: {{ collectd.plugindirconfig }}
         plugins: {{ salt['pillar.get']('collectd:plugins:enable', false) }}

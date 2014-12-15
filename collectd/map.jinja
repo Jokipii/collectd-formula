@@ -1,37 +1,53 @@
 {% set collectd = salt['grains.filter_by']({
-    'default': {
+    'Debian': {
+        'pkg': 'collectd',
+        'service': 'collectd',
+        'config': '/etc/collectd/collectd.conf',
+        'plugindirconfig': '/etc/collectd/plugins',
+        'group': 'root',
+        'javalib': '/usr/lib/collectd/java.so',
+    },
+    'RedHat': {
         'pkg': 'collectd',
         'service': 'collectd',
         'config': '/etc/collectd.conf',
         'plugindirconfig': '/etc/collectd.d',
         'group': 'root',
     },
-    'Debian': {
-        'config': '/etc/collectd/collectd.conf',
-        'plugindirconfig': '/etc/collectd/plugins',
-        'javalib': '/usr/lib/collectd/java.so',
-    },
-    'RedHat': {
-    },
     'Solaris': {
         'pkg': 'CSWcollectd',
+        'service': 'collectd',
         'config': '/etc/opt/csw/collectd.conf',
         'plugindirconfig': '/etc/opt/csw/conf.d',
+        'group': 'root',
     },
     'Suse': {
+        'pkg': 'collectd',
+        'service': 'collectd',
+        'config': '/etc/collectd.conf',
         'plugindirconfig': '/etc/collectd',
+        'group': 'root',
     },
     'FreeBSD': {
         'pkg': 'collectd5',
+        'service': 'collectd',
         'plugindirconfig': '/usr/local/etc/collectd',
         'config': '/usr/local/etc/collectd.conf',
+        'plugindirconfig': '/etc/collectd.d',
         'group': 'wheel',
     },
     'Archlinux': {
+        'pkg': 'collectd',
+        'service': 'collectd',
+        'config': '/etc/collectd.conf',
+        'plugindirconfig': '/etc/collectd.d',
         'group': 'wheel',
     },
     'Gentoo': {
         'pkg': 'app-admin/collectd',
+        'service': 'collectd',
+        'config': '/etc/collectd.conf',
+        'plugindirconfig': '/etc/collectd.d',
         'group': 'collectd',
     },
-}, merge=salt['pillar.get']('collectd:lookup'), base='default') %}
+}, merge=salt['pillar.get']('collectd:lookup')) %}

@@ -1,4 +1,5 @@
 {% from "collectd/map.jinja" import collectd with context %}
+{% set listens = salt['pillar.get']('collectd:plugins:network:listens') %}
 
 include:
   - collectd
@@ -7,11 +8,26 @@ include:
   file.managed:
     - source: salt://collectd/files/network.conf
     - user: root
-    - group: root
+    - group: {{ collectd.group }}
     - mode: 644
     - template: jinja
     - watch_in:
       - service: collectd-service
     - defaults:
-        host: {{ salt['pillar.get']('collectd:plugins:network:host') }}
-        port: {{ salt['pillar.get']('collectd:plugins:network:port') }}
+        servers: {{ salt['pillar.get']('collectd:plugins:network:servers') }}
+        listens: {{ listens }}
+        ReportStats: {{ salt['pillar.get']('collectd:plugins:network:ReportStats', false) }}
+
+{% for listen in listens %}
+{% if AuthFile in listen %}
+{{ listen.AuthFile }}
+  file.managed:
+    - source: salt://collectd/files/authfile.conf
+    - user: root
+    - group: {{ collectd.group }}
+    - mode: 644
+    - template: jinja
+    - defaults:
+        users: {{ listen.users }}
+{% endif %}
+{% endfor %}

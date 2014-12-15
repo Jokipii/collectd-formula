@@ -17,8 +17,23 @@ collectd:
     syslog:
       LogLevel: info
     network:
-      host: 'logstash'
-      port: 25826
+      servers:
+        - host: logstash
+          port: 25826
+          SecurityLevel: Encrypt
+          Username: myusername
+          Password: mypassword
+          Interface: eth0
+      listens:
+        - host: hostname
+          port: 25826
+          SecurityLevel: Encrypt
+          AuthFile: /opt/collectd/etc/passwd
+          Interface: eth0
+          users:
+            username: password
+            username2: password2
+      ReportStats: true
     mysql:
       host: 'localhost'
       port: '3306'

@@ -1,6 +1,16 @@
 collectd:
+  # Documentation for options: https://collectd.org/documentation/manpages/collectd.conf.5.shtml
   FQDNLookup: true
+  BaseDir: /var/lib/collectd
+  PluginDir: /var/lib/collectd
   TypesDB: ['/usr/share/collectd/types.db']
+  AutoLoadPlugin: false
+  Interval: 10
+  Timeout: 2
+  ReadThreads: 5
+  WriteThreads: 5
+  WriteQueueLimitHigh: 1000000
+  WriteQueueLimitLow: 800000
   plugins:
     default: [battery, cpu, entropy, load, memory, swap, load, users]
     enable: false

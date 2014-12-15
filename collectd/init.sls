@@ -29,7 +29,16 @@ collectd:
     - defaults:
         hostname: {{ salt['grains.get']('fqdn') }}
         FQDNLookup: {{ salt['pillar.get']('collectd:FQDNLookup', 'false') }}
+        BaseDir: {{ salt['pillar.get']('collectd:BaseDir', '/var/lib/collectd') }}
+        PluginDir: {{ salt['pillar.get']('collectd:PluginDir', '/var/lib/collectd') }}
         types: {{ salt['pillar.get']('collectd:TypesDB', ['/usr/share/collectd/types.db']) }}
+        AutoLoadPlugin: {{ salt['pillar.get']('collectd:AutoLoadPlugin', false) }}
+        Interval: {{ salt['pillar.get']('collectd:Interval', 10) }}
+        Timeout: {{ salt['pillar.get']('collectd:Timeout', 2) }}
+        ReadThreads: {{ salt['pillar.get']('collectd:ReadThreads', 5) }}
+        WriteThreads: {{ salt['pillar.get']('collectd:WriteThreads', 5) }}
+        WriteQueueLimitHigh: {{ salt['pillar.get']('collectd:WriteQueueLimitHigh ,1000000) }}
+        WriteQueueLimitLow: {{ salt['pillar.get']('collectd:WriteQueueLimitLow ,800000) }}
         default: {{ salt['pillar.get']('collectd:plugins:default') }}
         plugindirconfig: {{ collectd.plugindirconfig }}
         plugins: {{ salt['pillar.get']('collectd:plugins:enable', false) }}

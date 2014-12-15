@@ -10,7 +10,7 @@ collectd:
 {{ collectd.plugindirconfig }}:
   file.directory:
     - user: root
-    - group: root
+    - group: {{ collectd.group }}
     - dir_mode: 755
     - file_mode: 644
     - makedirs: True
@@ -21,7 +21,7 @@ collectd:
   file.managed:
     - source: salt://collectd/files/collectd.conf
     - user: root
-    - group: root
+    - group: {{ collectd.pkg }}
     - mode: 644
     - template: jinja
     - watch_in:

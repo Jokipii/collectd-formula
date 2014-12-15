@@ -21,7 +21,7 @@ collectd:
   file.managed:
     - source: salt://collectd/files/collectd.conf
     - user: root
-    - group: {{ collectd.pkg }}
+    - group: {{ collectd.group }}
     - mode: 644
     - template: jinja
     - watch_in:

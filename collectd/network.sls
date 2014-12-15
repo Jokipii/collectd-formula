@@ -20,7 +20,7 @@ include:
 
 {% for listen in listens %}
 {% if listen.AuthFile %}
-{{ listen.AuthFile }}
+{{ listen.AuthFile }}:
   file.managed:
     - source: salt://collectd/files/authfile.conf
     - user: root

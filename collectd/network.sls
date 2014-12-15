@@ -19,7 +19,7 @@ include:
         ReportStats: {{ salt['pillar.get']('collectd:plugins:network:ReportStats', false) }}
 
 {% for listen in listens %}
-{% if AuthFile in listen %}
+{% if listen.AuthFile %}
 {{ listen.AuthFile }}
   file.managed:
     - source: salt://collectd/files/authfile.conf
